@@ -61,7 +61,7 @@ class SparseBasicBlock(spconv.SparseModule):
 
         return out
 
-class VoxelBackBone8x(nn.Module):
+class PRConv(nn.Module):
     def __init__(self, model_cfg, input_channels, grid_size, **kwargs):
         super().__init__()
         self.model_cfg = model_cfg

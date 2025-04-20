@@ -77,7 +77,7 @@ MODEL:
         NAME: MeanVFE
 
     BACKBONE_3D:
-        NAME: VoxelBackBone8x
+        NAME: PRConv
         MM: True
         OUT_CHANNLE: 64
 
