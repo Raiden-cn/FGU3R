@@ -7,7 +7,6 @@ data/kitti/*
 venv/
 *.idea/
 *.so
-*.sh
 *.pth
 *.pkl
 *.zip
