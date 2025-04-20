@@ -84,7 +84,7 @@ FGU3R
 │   │   │   ├──label_2
 │   │   │   ├──image_2
 │   │   │   ├──pseudo_velodyne
-│   │   │   ├──planes (optional)
+│   │   │   ├──planes
 │   │   ├── testing
 │   │   │   ├──calib
 │   │   │   ├──velodyne
@@ -104,23 +104,35 @@ FGU3R
 ### KITTI val car
 |              Detector                   | GPU (train)| Easy | Mod. | Hard|
 |---------------------------------------------|:----------:|:-------:|:-------:|:-------:|
-| [FGU3R](./tools/cfgs/kitti_models/FGU3R.yaml) | ~13 GB | 95.26 | 85.84 | 83.67 | 
+| [FGU3R](./tools/cfgs/kitti_models/fgu3r.yaml) | ~16 GB | 95.26 | 85.84 | 83.67 |
 ****
 
 ## Training
 ```shell
 cd tools
-python train.py --cfg_file cfgs/kitti_models/fgu3r.yaml
+# single gpu
+python train.py --cfg_file cfgs/kitti_models/fgu3r.yaml --extra_tag baseline
+# multi gpus
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./scripts/dist_train.sh 8 --cfg_file cfgs/kitti_models/fgu3r.yaml --extra_tag baseline
 ```
 
 ## Testing
 ```shell
 cd tools
-python test.py --cfg_file cfgs/kitti_models/fgu3r.yaml --ckpt ../ckpt/fgu3r_kitti.pth
+# single gpu
+python test.py --cfg_file cfgs/kitti_models/fgu3r.yaml --extra_tag baseline --ckpt ../ckpt/fgu3r.pth
+# multi gpus
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./scripts/dist_test.sh 8 --cfg_file cfgs/kitti_models/fgu3r.yaml --extra_tag baseline --ckpt ../ckpt/fgu3r.pth
 ```
 
 ## TODO
  - [ ] Release pseudo point cloud link
+ - [ ] Developing FGU3R++
+
+## Acknowledgement
+Our code mainly based on [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) by Shaoshuai Shi. Part code from following excellent repos: [SFD](https://github.com/LittlePey/SFD), [TED](https://github.com/hailanyi/TED), [SE-SSD](https://github.com/Vegeta2020/SE-SSD).
+
+Thanks for above great repos and the reviewers's valuable comments on our paper.
 
 ## Citation
 If you find this work useful in your research, please consider cite:
