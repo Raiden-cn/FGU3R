@@ -1,6 +1,6 @@
 numpy==1.23
 llvmlite
-numba
+numba==0.58
 torch>=1.1
 tensorboardX
 easydict
